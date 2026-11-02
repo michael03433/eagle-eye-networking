@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://sm471bj1spee"]
+
+[ext_resource type="Script" uid="uid://qh3uomx2o1ju" path="res://scripts/network_manager.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://b60hng8gn86fn" path="res://scenes/player.tscn" id="2_0wfyh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_sugp2"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_jyhfs"]
+background_mode = 2
+sky = SubResource("Sky_sugp2")
+glow_enabled = true
+
+[node name="Main" type="Node3D" unique_id=501853669]
+script = ExtResource("1_o5qli")
+player_scene = ExtResource("2_0wfyh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1108067972]
+environment = SubResource("Environment_jyhfs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1743169080]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25000003, 0, 0.49999997, 0.86602545, -0.50000006, 0.74999994, -0.4330127, 0, 25.013103, 0)
+shadow_enabled = true
+
+[node name="Players" type="Node3D" parent="." unique_id=1062394920]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1320511921]
+_spawnable_scenes = PackedStringArray("uid://b60hng8gn86fn")
+spawn_path = NodePath("../Players")
+
+[node name="Ground" type="CSGBox3D" parent="." unique_id=1571840973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0474548, 0, -0.014831543)
+use_collision = true
+size = Vector3(25.313, -2, 27.329)
